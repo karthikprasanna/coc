@@ -5,19 +5,20 @@ BOARD
 This class denotes the base class for the game board.
 '''
 import numpy as np
-import colors
+import src.colors as colors
+from src.object import Object
 
 
 class Board():
 
-    def __init__(self, rows, columns):
+    def __init__(self, num_rows, num_columns):
         '''
         Initialises the required board with the length, width and the board matrix
         '''
-        self._rows = rows
-        self._columns = columns
+        self._rows = num_rows
+        self._columns = num_columns
         self._board = np.full((self._rows, self._columns, 2),
-                              ' '*10)
+                              " "*10)
 
     def getdim(self):
         '''
@@ -25,18 +26,29 @@ class Board():
         '''
         return (self._rows, self._columns)
 
-    def put_to_board(self, X, Y, ASCII, COLOR):
+    def write_object_on_board(self, Object):
+        '''
+        Draw the shape of the object onto the game board and make its type ty
+        Also casterise the object onto the baord (make it one with the board)
+        '''
+        for i in range(Object._h):
+            for j in range(Object._w):
+                if(Object._shape[i][j] != ' '):
+                    self.put_to_board(
+                        Object._h -1 -i + Object._y, j + Object._x, Object._shape[i][j], Object._type)
+
+    def put_to_board(self, X, Y, character, type):
         '''
         Prints the required ASCII character along with its COLOR at (X,Y)
         '''
-        self._board[X][Y][0] = ASCII
-        self._board[X][Y][1] = COLOR
+        self._board[X][Y][0] = character
+        self._board[X][Y][1] = type
 
     def remove_from_board(self, X, Y):
         '''
         Clears the (X,Y) coordinate from the board
         '''
-        self.put_to_board(X, Y, " ", "Normal")
+        self.put_to_board(X, Y, "", "grass")
 
     # def get_type(self, X, Y):
     #     '''
@@ -57,3 +69,13 @@ class Board():
         Get the block element at X,Y
         '''
         return self._board[X][Y]
+
+    # print the board in the console
+    def print_board(self):
+        '''
+        Prints the board in the console
+        '''
+        for i in range(self._rows):
+            for j in range(self._columns):
+                self.printxy(self._rows - 1 - i, j)
+            print()

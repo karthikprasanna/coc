@@ -23,8 +23,8 @@ Initialises the person with the characteristics of a king
 
 '''
 
-from person import Person
-import config
+from src.person import Person
+import src.config as config
 
 class King(Person):
 

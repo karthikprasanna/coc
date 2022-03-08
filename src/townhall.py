@@ -1,6 +1,5 @@
-from distutils.command import config
-from object import Object
-import config
+from src.object import Object
+import src.config as config
 
 class Townhall(Object):
     def __init__(self):

@@ -1,4 +1,4 @@
-from building import Building
+from src.building import Building
 
 class Wall(Building):
     def __init__(self, x, y):

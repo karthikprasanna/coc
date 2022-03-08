@@ -9,4 +9,4 @@ cannon-shooting
 townhall
 spawn
 hut
-
+grass

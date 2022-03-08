@@ -1,5 +1,5 @@
 from distutils.command import config
-from person import Person
+from src.person import Person
 
 class Barbarian(Person):
     def __init__(self, x, y):

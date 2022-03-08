@@ -26,8 +26,8 @@ The direction can be given either in wasd or up down left right
 
 '''
 
-from object import Object
-import config
+from src.object import Object
+import src.config as config
 
 class Person(Object):
 

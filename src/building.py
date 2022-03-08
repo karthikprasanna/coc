@@ -1,5 +1,4 @@
-from object import Object
-from gameboard import Gameboard
+from src.object import Object
 
 class Building(Object):
     def __init__(self, x, y, h, w, type):
@@ -10,8 +9,11 @@ class Building(Object):
         if(self._hitpoints > 0):
             self._hitpoints -= 1
         if(self._hitpoints == 0):
-            self.destroy_self(self, Gameboard)
+            # destroty the building
+            pass
     
     def renovate_building(self):
         self._hitpoints = 3
+
+
      

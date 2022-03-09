@@ -105,11 +105,16 @@ class Object:
     #         for j in range(self._w):
     #             Board.remove_from_board(i+self._x, j+self._y)
 
-    def change_type(self, new_type):
+    def change_type(self, new_type, village = None):
         '''
         Change the type of the object (used for changing the colors of the object mid-game)
         '''
-        self._type = new_type
+        if village != None:
+            village.remove_object_from_board(self)
+            self._type = new_type
+            village.write_object_on_board(self)
+        else:
+            self._type = new_type
 
     def get_coord(self):
         '''

@@ -39,4 +39,4 @@ def input_to(getch, timeout=0.1):
         return text
     except AlarmException:
         signal.signal(signal.SIGALRM, signal.SIG_IGN)
-        return None
+        return 'n'

@@ -1,8 +1,8 @@
 import os
-from sqlalchemy import true
 from src.input import input_to, Get
 import src.config as config
 from src.village import Village
+from src.barbarians import Barbarians
 from src.king import King
 import time
 
@@ -11,28 +11,71 @@ if __name__ == '__main__':
 
     king = King()
 
-    # Initialise the gameboard
+    barbarians = Barbarians(10)
+
     village = Village()
 
+    village.construct_village(king, barbarians)
 
-    while true:
+    prev_time = time.time()
+
+    config.session_ID = prev_time
+    
+    # add the session ID to the log file
+    f = open('./replays/logs.txt', 'a')
+    f.write(str(config.session_ID) + ' n')
+
+    user_input = []
+
+    while True:
+        if time.time() - prev_time > 0.5:
+            prev_time = time.time()
+            config.clock = not config.clock
+
         os.system('clear')
-
-        village.construct_village(king)
 
         village.print_board()
 
-        key = input_to(Get())
-        
-        if key == 'q':
+        if config.game_over:
+            print(config.game_result)
+            print("your session ID is: " + str(config.session_ID))
+            for ch in user_input:
+                f.write(str(ch))
+            f.write('\n')
+            f.close()
             break
-        elif key in ['w', 's', 'a', 'd', 'up', 'down', 'left', 'right']:
-            king.move(key)
 
+        if config.clock:
+            village.activate_defense()
+            if village.is_village_destroyed():
+                config.game_result = "Victory"
+                config.game_over = True
+            elif village.is_troops_lost(barbarians):
+                config.game_result = "Defeat"
+                config.game_over = True
+
+        if not config.clock:
+            if barbarians._is_spawning:
+                village.activate_attack()
+
+        key = input_to(Get())
+
+        if key != ' ':
+            user_input.append(key)
+        else:
+            user_input.append('m')
+
+        if key == 'q':
+            config.game_over = True
+        elif key in ['w', 's', 'a', 'd']:
+            if king._health > 0:
+                king.move(key, village)
+        elif key in ['k', 'o', 'l']:
+            if not barbarians._is_spawning:
+                village.spawn(key, barbarians)
+        elif key == ' ':
+            if king._health > 0:
+                king.attack(village)
+            
         time.sleep(config.FRAME_TIME)
         
-
-
-
-
-

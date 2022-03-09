@@ -31,7 +31,7 @@ import src.config as config
 
 class Person(Object):
 
-    def __init__(self, x, y, h, w, type, damage, health, movement_speed):
+    def __init__(self, x, y, h, w, type, damage, health, movement_speed, attack_range):
         '''
         It just calls the constructor of the parent class object. 
         '''
@@ -39,23 +39,53 @@ class Person(Object):
         self._damage = damage
         self._health = health
         self._movement_speed = movement_speed
+        self._attack_range = attack_range
 
-    def move(self, direction):
+    def move(self, direction, village):
         '''
         Moves the person according to the direction given
         The direction can be given either in wasd or up down left right
        
         '''
+        village.remove_object_from_board(self)
         if direction in ['w', 'up']:
             if(self._y + self._h < config.screen_height):
-                self._y += 1
+                if not village.is_occupied(self._x, self._y + self._movement_speed):
+                    self._y += self._movement_speed
+
         elif direction in ['s', 'down']:
             if(self._y > 0):
-                self._y -= 1
+                if not village.is_occupied(self._x, self._y - self._movement_speed):
+                  self._y -= self._movement_speed
+
         elif direction in ['a', 'left']:
             if(self._x > 0):
-                self._x -= 1
+                if not village.is_occupied(self._x - self._movement_speed, self._y):
+                  self._x -= self._movement_speed 
+
         elif direction in ['d', 'right']:
             if(self._x + self._w < config.screen_width):
-                self._x += 1
+                if not village.is_occupied(self._x + self._movement_speed + self._w, self._y):
+                    self._x += self._movement_speed
+
+        village.write_object_on_board(self)
+
+    def damage_person(self, damage):
+        '''
+        Damages the person by the given amount
+        '''
+        self._health -= damage
+
+        if '_' in self._type:
+            self._type = self._type.split('_')[0]
+            
+        if self._health in range(20, 50):
+            self._type += '_damaged'
+        elif self._health in range(1, 20):
+            self._type += '_critical'
+        elif self._health <= 0:
+            self._type += '_destroyed'
+            self._health = 0
+
+
        

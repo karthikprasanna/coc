@@ -18,7 +18,7 @@ class Board():
         self._rows = num_rows
         self._columns = num_columns
         self._board = np.full((self._rows, self._columns, 2),
-                              " "*10)
+                              " "*50)
 
     def getdim(self):
         '''
@@ -33,9 +33,16 @@ class Board():
         '''
         for i in range(Object._h):
             for j in range(Object._w):
-                if(Object._shape[i][j] != ' '):
-                    self.put_to_board(
-                        Object._h -1 -i + Object._y, j + Object._x, Object._shape[i][j], Object._type)
+                self.put_to_board(
+                    Object._h -1 -i + Object._y, j + Object._x, Object._shape[i][j], Object._type)
+    
+    def remove_object_from_board(self, Object):
+        '''
+        Removes the object from the board
+        '''
+        for i in range(Object._h):
+            for j in range(Object._w):
+                self.remove_from_board(Object._h -1 -i + Object._y, j + Object._x)
 
     def put_to_board(self, X, Y, character, type):
         '''
@@ -48,7 +55,7 @@ class Board():
         '''
         Clears the (X,Y) coordinate from the board
         '''
-        self.put_to_board(X, Y, "", "grass")
+        self.put_to_board(X, Y, " ", "grass")
 
     # def get_type(self, X, Y):
     #     '''

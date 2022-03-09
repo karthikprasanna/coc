@@ -1,10 +1,9 @@
-# Python Programming illustrating
-# numpy.full method
 
-import numpy as geek
+l =[]
 
-a = geek.full([2, 3], 67, dtype = int)
-print("\nMatrix a : \n", a)
+for i in range(5):
+    c = 10
+    l.append(c)
 
-c = geek.full([3, 3], 10.1)
-print("\nMatrix c : \n", c)
+l[2]+=1
+print(l)

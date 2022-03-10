@@ -5,34 +5,34 @@ from src.barbarians import Barbarians
 from src.king import King
 import time
 
-def get_user_input(file_obj, session_ID):
+def get_session(file_obj, session_ID):
     '''
     get the user input from the log file
     '''
     for line in file_obj:
         if line.split(' ')[0] == session_ID:
             user_input = line.split(' ')[1]
-            return user_input
+            counter = line.split(' ')[2]
+            return user_input, counter
         
-    return "Invalid"
+    return "Invalid", ""
+
 
 if __name__ == '__main__':
 
     king = King()
 
-    barbarians = Barbarians(10)
+    barbarians = Barbarians(50)
 
     village = Village()
 
     village.construct_village(king, barbarians)
 
-    prev_time = time.time()
-
     config.session_ID = input('Enter session ID: ')
     
     f = open('./replays/logs.txt', 'r')
 
-    user_input = get_user_input(f, config.session_ID)
+    user_input, counter = get_session(f, config.session_ID)
 
     if user_input == "Invalid":
         print("the session ID is invalid")
@@ -40,9 +40,11 @@ if __name__ == '__main__':
         exit(0)
 
     for key in user_input:
-        if time.time() - prev_time > 0.5:
-            prev_time = time.time()
-            config.clock = not config.clock
+        if counter[0] == '1':
+            config.clock = True
+        else:
+            config.clock = False
+        counter = counter[1:]
 
         os.system('clear')
 

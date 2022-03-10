@@ -17,6 +17,8 @@ session_ID = 0.0
 screen_height = 40
 screen_width =  150
 
+debug_string = ""
+
 king_damage = 15
 king_health = 100
 king_movement_speed = 1
@@ -26,6 +28,8 @@ barbarian_damage = 10
 barbarian_health = 100
 barbarian_movement_speed = 1
 barbarian_attack_range = 1
+
+troop_max_health = 100
 
 king_initial_x = math.floor(screen_width * 3/4)
 king_initial_y = math.floor(screen_height * 1/4)
@@ -71,11 +75,16 @@ wall_a_x = math.floor((screen_width - 1)*1 / 4)
 wall_a_y = math.floor((screen_height - 1)*1 / 4)
 
 spawning_point = {
-    'l' : [ math.floor((screen_width)*3 / 4),  math.floor((screen_height)*1 / 2)],
+    'l' : [ math.floor((screen_width)*7 / 8),  math.floor((screen_height)*1 / 2)],
     'o' : [ math.floor((screen_width)*1 / 2),  math.floor((screen_height)*3 / 4)],
     'k' : [ math.floor((screen_width)*1 / 4),  math.floor((screen_height)*1 / 2)],
 }
 
+bottombar_x = 0
+bottombar_y = 0
+
+bottombar_h = 2
+bottombar_w = 25
 
 # FRAME REFRESHING
 FPS = 20

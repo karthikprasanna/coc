@@ -29,23 +29,15 @@ class Barbarian(Person):
 
     def attack(self, village):
         building = village.get_closest_building(self, False)
+
         if building != None:
             if(building.is_near_building(self)):
-                village.remove_object_from_board(building)
-                self.change_type('barbarian_attacking', village)
-                building.damage_building(self._damage)
-
-
-                if '_' in building._type:
-                    if building._type.split('_')[1] == 'destroyed':
-                        # remove building from the list of buildings
-                        village._buildings.remove(building)
-                    else:
-                        village.write_object_on_board(building)
-
-                else:
-                    village.write_object_on_board(building)
+                building.attack_building(village, self)
 
             direction = building.get_direction_to_building(self, village)
             if direction != None:
                 self.move(direction, village)
+            else:
+                building = building.get_blocking_wall(self, village)
+                if building != None:
+                    building.attack_building(village, self)

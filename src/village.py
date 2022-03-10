@@ -5,6 +5,7 @@ from src.hut import Hut
 from src.cannon import Cannon
 from src.wall import Wall
 from src.barbarian import Barbarian
+from src.bottombar import Bottombar
 
 class Village(Board):
     def __init__(self):
@@ -102,6 +103,14 @@ class Village(Board):
         else:
             return True
 
+    def get_wall(self, x, y):
+        for building in self._buildings:
+            if building._type.split('_')[0] == 'wall':
+                if building._x == x and building._y == y:
+                    return building
+        return None
+        
+
     def activate_defense(self):
         for cannon in self._defense:
             for troop in self._troops:
@@ -116,11 +125,12 @@ class Village(Board):
         closest_building = None
         closest_distance = config.screen_height + config.screen_width
         for building in self._buildings:
-            if building._type.split('_')[0] == 'wall' and include_wall == True:
-                distance =  building.get_distance_to_building(person)
-                if distance < closest_distance:
-                    closest_distance = distance
-                    closest_building = building
+            if building._type.split('_')[0] == 'wall' and include_wall == False:
+                continue
+            distance =  building.get_distance_to_building(person)
+            if distance < closest_distance:
+                closest_distance = distance
+                closest_building = building
         return closest_building
 
     def is_over_barbarian(self, x, y):
@@ -150,6 +160,9 @@ class Village(Board):
         else:
             return False
             
+    def draw_king_health_bar(self, king):
+        bar = Bottombar(10, 'kinghealth10')
+        self.write_object_on_board(bar)
 
     # write the village on the board    
     def construct_village(self, king, barbarians):
@@ -159,3 +172,4 @@ class Village(Board):
         self.construct_hut()
         self.construct_wall()
         self.deploy_king(king)
+       # self.draw_king_health_bar(king)

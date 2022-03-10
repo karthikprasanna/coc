@@ -33,7 +33,19 @@ COLORS = {
     'wall_critical': '\x1b[43;37m',
     
     'grass': '\x1b[42;37m',
-    'debug': '\x1b[42;37m'
+    'debug': '\x1b[42;37m',
+
+    'kinghealth0': '\x1b[40;37m',
+    'kinghealth1': '\x1b[40;37m',
+    'kinghealth2': '\x1b[40;37m',
+    'kinghealth3': '\x1b[40;37m',
+    'kinghealth4': '\x1b[40;37m',
+    'kinghealth5': '\x1b[40;37m',
+    'kinghealth6': '\x1b[40;37m',
+    'kinghealth7': '\x1b[40;37m',
+    'kinghealth8': '\x1b[40;37m',
+    'kinghealth9': '\x1b[40;37m',
+    'kinghealth10': '\x1b[40;37m',
     
 }
 

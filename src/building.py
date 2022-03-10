@@ -1,3 +1,4 @@
+from matplotlib.pyplot import bar
 from src.object import Object
 
 class Building(Object):
@@ -80,13 +81,13 @@ class Building(Object):
         x_b = self._x + self._w // 2
         y_b = self._y + self._h // 2
 
-        if x_p > x_b and (not village.is_occupied(barbarian._x - 1, barbarian._y) or village.is_over_barbarian(barbarian._x - 1, barbarian._y)):
+        if x_p > x_b and x_p - barbarian._movement_speed // 2 != x_b and (not village.is_occupied(barbarian._x - 1, barbarian._y) or village.is_over_barbarian(barbarian._x - 1, barbarian._y)):
             return 'a'
-        elif x_p < x_b and (not village.is_occupied(barbarian._x + barbarian._w, y_p) or village.is_over_barbarian(barbarian._x + barbarian._w, y_p)):
+        elif x_p < x_b and x_p + barbarian._movement_speed //2 != x_b and (not village.is_occupied(barbarian._x + barbarian._w, y_p) or village.is_over_barbarian(barbarian._x + barbarian._w, y_p)):
             return 'd'
-        elif y_p > y_b and (not village.is_occupied(barbarian._x, barbarian._y - 1) or village.is_over_barbarian(barbarian._x, barbarian._y - 1)):
+        elif y_p > y_b and y_p - barbarian._movement_speed // 2 != y_b and (not village.is_occupied(barbarian._x, barbarian._y - 1) or village.is_over_barbarian(barbarian._x, barbarian._y - 1)):
             return 's'
-        elif y_p < y_b and (not village.is_occupied(barbarian._x, barbarian._y + barbarian._h) or village.is_over_barbarian(barbarian._x, barbarian._y + barbarian._h)):
+        elif y_p < y_b and y_p + barbarian._movement_speed // 2 != y_b and (not village.is_occupied(barbarian._x, barbarian._y + barbarian._h) or village.is_over_barbarian(barbarian._x, barbarian._y + barbarian._h)):
             return 'w'
         else:
             return None

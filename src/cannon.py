@@ -25,7 +25,6 @@ class Cannon(Building):
 
     def attack(self, village, troop):
         village.remove_object_from_board(troop)
-        self.change_type('cannon_attacking', village)
         troop.damage_person(self._damage)
         
         if '_' in troop._type:

@@ -8,4 +8,5 @@ class Bottombar(Object):
 
     def update_progress(self, new_progress, village = None):
         self._progress = new_progress
-        self.change_type(self._type.split('_')[0] + str(self._progress), village)
+        new_type = self._type.split('_')[0] +  '_' + str(self._progress)
+        self.change_type(new_type, village)

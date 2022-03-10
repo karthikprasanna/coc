@@ -41,6 +41,13 @@ class Person(Object):
         self._movement_speed = movement_speed
         self._attack_range = attack_range
 
+    def attack(self, village):
+        for building in village._buildings:
+            if(building.is_near_building(self)):
+                building.attack_building(village, self)
+
+                break
+
     def move(self, direction, village):
         '''
         Moves the person according to the direction given

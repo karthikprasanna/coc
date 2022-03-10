@@ -5,15 +5,23 @@ from src.village import Village
 from src.barbarians import Barbarians
 from src.king import King
 import time
+from src.spell import Spell
+from src.bottombar import Bottombar
 
 
 if __name__ == '__main__':
 
     king = King()
 
-    barbarians = Barbarians(50)
+    num_barbarians = input('Enter number of barbarians: ')
+
+    barbarians = Barbarians(int(num_barbarians))
+
+    spell = Spell()
 
     village = Village()
+
+    bar = Bottombar(10, 'kinghealth_10')
 
     village.construct_village(king, barbarians)
 
@@ -50,12 +58,15 @@ if __name__ == '__main__':
                     f.write("1")
                 else:
                     f.write("0")
+            f.write(' ')
+            f.write(str(num_barbarians))
             f.write("\n")
             f.close()
             break
 
         if config.clock:
             village.activate_defense()
+            bar.update_progress(int(king._health / 10), village)
             if village.is_village_destroyed():
                 config.game_result = "Victory"
                 config.game_over = True
@@ -85,6 +96,14 @@ if __name__ == '__main__':
         elif key == ' ':
             if king._health > 0:
                 king.attack(village)
+        elif key == 'r':
+            if not spell._is_rage_spell_cast:
+                spell._is_rage_spell_cast = True
+                spell.activate_rage_spell(village)
+        elif key == 'h':
+            if not spell._is_heal_spell_cast:
+                spell._is_heal_spell_cast = True
+                spell.activate_heal_spell(village)
             
         time.sleep(config.FRAME_TIME)
         

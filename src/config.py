@@ -80,10 +80,10 @@ spawning_point = {
     'k' : [ math.floor((screen_width)*1 / 4),  math.floor((screen_height)*1 / 2)],
 }
 
-bottombar_x = 0
-bottombar_y = 0
+bottombar_x = screen_width // 8
+bottombar_y = screen_height // 16
 
-bottombar_h = 2
+bottombar_h = 1
 bottombar_w = 25
 
 # FRAME REFRESHING

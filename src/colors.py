@@ -35,17 +35,17 @@ COLORS = {
     'grass': '\x1b[42;37m',
     'debug': '\x1b[42;37m',
 
-    'kinghealth0': '\x1b[40;37m',
-    'kinghealth1': '\x1b[40;37m',
-    'kinghealth2': '\x1b[40;37m',
-    'kinghealth3': '\x1b[40;37m',
-    'kinghealth4': '\x1b[40;37m',
-    'kinghealth5': '\x1b[40;37m',
-    'kinghealth6': '\x1b[40;37m',
-    'kinghealth7': '\x1b[40;37m',
-    'kinghealth8': '\x1b[40;37m',
-    'kinghealth9': '\x1b[40;37m',
-    'kinghealth10': '\x1b[40;37m',
+    'kinghealth_0': '\x1b[40;37m',
+    'kinghealth_1': '\x1b[40;37m',
+    'kinghealth_2': '\x1b[40;37m',
+    'kinghealth_3': '\x1b[40;37m',
+    'kinghealth_4': '\x1b[40;37m',
+    'kinghealth_5': '\x1b[40;37m',
+    'kinghealth_6': '\x1b[40;37m',
+    'kinghealth_7': '\x1b[40;37m',
+    'kinghealth_8': '\x1b[40;37m',
+    'kinghealth_9': '\x1b[40;37m',
+    'kinghealth_10': '\x1b[40;37m',
     
 }
 

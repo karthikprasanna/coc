@@ -112,9 +112,11 @@ class Object:
         if village != None:
             village.remove_object_from_board(self)
             self._type = new_type
+            self._shape = shapes.get_shape(new_type)
             village.write_object_on_board(self)
         else:
             self._type = new_type
+            self._shape = shapes.get_shape(new_type)
 
     def get_coord(self):
         '''

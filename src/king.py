@@ -35,4 +35,3 @@ class King(Person):
         super().__init__(config.king_initial_x, config.king_initial_y, 1, 2, 'king', config.king_damage, config.king_health, config.king_movement_speed, config.king_attack_range)
 
 
-

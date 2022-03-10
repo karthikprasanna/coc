@@ -22,7 +22,6 @@ class Building(Object):
 
     def attack_building(self, village, person):
         village.remove_object_from_board(self)
-        person.change_type('barbarian_attacking', village)
         self.damage_building(person._damage)
 
 

@@ -7,6 +7,11 @@ class Barbarians():
             self._spawning_point = [0,0]
             self._barbarians = []
 
+    def create_unit(self, x, y):
+        barbarian = Barbarian(x, y)
+        self._barbarians.append(barbarian)
+        return barbarian
+
     
 
 

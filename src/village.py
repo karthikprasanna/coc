@@ -3,17 +3,19 @@ import src.config as config
 from src.townhall import Townhall
 from src.hut import Hut
 from src.cannon import Cannon
+from src.tower import Tower
 from src.wall import Wall
 from src.barbarian import Barbarian
+from src.archer import Archer
 from src.bottombar import Bottombar
 
 class Village(Board):
-    def __init__(self):
+    def __init__(self, level):
         super().__init__(config.screen_height, config.screen_width)
         self._buildings = []
         self._troops = []
         self._defense = []
-
+        self._level = level
 
     def generate_background(self):
         '''
@@ -64,6 +66,19 @@ class Village(Board):
         self._defense.append(cannon1)
         self._defense.append(cannon2)
 
+    def construct_tower(self):
+        tower1 = Tower(config.tower1_x, config.tower1_y, config.tower1_damage, config.tower1_range)
+        self.write_object_on_board(tower1)
+
+        tower2 = Tower(config.tower2_x, config.tower2_y, config.tower2_damage, config.tower2_range)
+        self.write_object_on_board(tower2)
+
+        self._buildings.append(tower1)
+        self._buildings.append(tower2)
+
+        self._defense.append(tower1)
+        self._defense.append(tower2)
+
     def construct_wall(self):
         for i in range(config.wall_a_x - 5, config.wall_b_x + 5):
             wall = Wall(i, config.wall_a_y - 5)
@@ -89,13 +104,13 @@ class Village(Board):
         self._troops.append(king)
         self.write_object_on_board(king) 
 
-    def spawn(self, controller, barbarians):
-        barbarians._is_spawning = True
-        barbarians._spawning_point = config.spawning_point[controller]
-        for i in range(barbarians._amount):
-            barbarians._barbarians.append(Barbarian(barbarians._spawning_point[0], barbarians._spawning_point[1]))
-            self._troops.append(barbarians._barbarians[i])
-            self.write_object_on_board(barbarians._barbarians[i])
+    def spawn(self, controller, persons):
+        persons._is_spawning = True
+        persons._spawning_point = config.spawning_point[controller]
+        for i in range(persons._amount):
+            person = persons.create_unit(persons._spawning_point[0], persons._spawning_point[1])
+            self._troops.append(person)
+            self.write_object_on_board(person)
 
     def is_occupied(self, x, y):
         if self._board[y][x][0] == ' ':
@@ -112,10 +127,10 @@ class Village(Board):
         
 
     def activate_defense(self):
-        for cannon in self._defense:
+        for defence_object in self._defense:
             for troop in self._troops:
-                if cannon.is_in_attacking_range(troop):
-                    cannon.attack(self, troop)
+                if defence_object.is_in_attacking_range(troop):
+                    defence_object.attack(self, troop)
                     break
 
     def get_closest_building(self, person, include_wall=True):
@@ -133,18 +148,9 @@ class Village(Board):
                 closest_building = building
         return closest_building
 
-    def is_over_barbarian(self, x, y):
-    
-        for barbarian in self._troops:
-            if barbarian._type.split('_')[0] == 'barbarian':
-                if x in range(barbarian._x, barbarian._x + barbarian._w) and y in range(barbarian._y, barbarian._y + barbarian._h):
-                    return True
-
-        return False
-
     def activate_attack(self):
         for troop in self._troops:
-            if troop._type.split('_')[0] == 'barbarian':
+            if troop._type.split('_')[0] in ['barbarian', 'archer', 'balloon']:
                 troop.attack(self)
 
     def is_village_destroyed(self):
@@ -154,18 +160,19 @@ class Village(Board):
             
         return True
 
-    def is_troops_lost(self, barbarians):
-        if len(self._troops) == 0 and barbarians._is_spawning:
+    def is_troops_lost(self, barbarians, archers, balloons):
+        if len(self._troops) == 0 and (barbarians._is_spawning or archers._is_spawning or balloons._is_spawning):
             return True
         else:
             return False
             
 
     # write the village on the board    
-    def construct_village(self, king, barbarians):
+    def construct_village(self, king):
         self.generate_background()
         self.construct_townhall()
         self.construct_cannon()
+        self.construct_tower()
         self.construct_hut()
         self.construct_wall()
         self.deploy_king(king)

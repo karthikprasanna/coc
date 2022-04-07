@@ -18,10 +18,30 @@ COLORS = {
     'king_damaged': '\x1b[41;37m',
     'king_critical': '\x1b[43;37m',
 
+    'queen': '\x1b[40;37m',
+    'queen_attacking': '\x1b[40;37m',
+    'queen_damaged': '\x1b[41;37m',
+    'queen_critical': '\x1b[43;37m',
+
+    'tower': '\x1b[40;37m',
+    'tower_attacking': '\x1b[40;37m',
+    'tower_damaged': '\x1b[41;37m',
+    'tower_critical': '\x1b[43;37m',
+
     'barbarian': '\x1b[40;37m',
     'barbarian_attacking': '\x1b[40;37m',
     'barbarian_damaged': '\x1b[41;37m',
     'barbarian_critical': '\x1b[43;37m',
+
+    'archer': '\x1b[40;37m',
+    'archer_attacking': '\x1b[40;37m',
+    'archer_damaged': '\x1b[41;37m',
+    'archer_critical': '\x1b[43;37m',
+
+    'balloon': '\x1b[40;37m',
+    'balloon_attacking': '\x1b[40;37m',
+    'balloon_damaged': '\x1b[41;37m',
+    'balloon_critical': '\x1b[43;37m',
 
     'cannon': '\x1b[40;37m',
     'cannon_attacking': '\x1b[40;37m',

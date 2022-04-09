@@ -9,7 +9,7 @@ SHAPES = shapes.SHAPES
 
 clock = False
 
-level = 1
+level = 3
 
 can_attack= False
 can_defend = False
@@ -81,20 +81,40 @@ cannon1_y = math.floor((screen_height - 1)*1 / 4)
 cannon1_damage = 10
 cannon1_range = 40
 
-tower1_x = math.floor((screen_width - 1)*1 / 4)
-tower1_y = math.floor((screen_height - 1)*2 / 4)
-tower1_damage = cannon1_damage
-tower1_range = cannon1_range
-
 cannon2_x = math.floor((screen_width - 1)*1 / 4)
 cannon2_y = math.floor((screen_height - 1)*3 / 4)
 cannon2_damage = 10
 cannon2_range = 40
 
+cannon3_x = math.floor((screen_width - 1)*1 / 4) + 2
+cannon3_y = math.floor((screen_height - 1)*1 / 4)
+cannon3_damage = 10
+cannon3_range = 40
+
+cannon4_x = math.floor((screen_width - 1)*1 / 4) + 2
+cannon4_y = math.floor((screen_height - 1)*3 / 4) 
+cannon4_damage = 10
+cannon4_range = 40
+
+tower1_x = math.floor((screen_width - 1)*1 / 4)
+tower1_y = math.floor((screen_height - 1)*2 / 4)
+tower1_damage = cannon1_damage
+tower1_range = cannon1_range
+
 tower2_x = math.floor((screen_width - 1)*1 / 4)
 tower2_y = math.floor((screen_height - 1)*2 / 4) + 1
 tower2_damage = cannon2_damage
 tower2_range = cannon2_range
+
+tower3_x = math.floor((screen_width - 1)*3 / 4)
+tower3_y = math.floor((screen_height - 1)*2 / 4) 
+tower3_damage = cannon3_damage
+tower3_range = cannon3_range
+
+tower4_x = math.floor((screen_width - 1)*3 / 4)
+tower4_y = math.floor((screen_height - 1)*2 / 4) + 1
+tower4_damage = cannon4_damage
+tower4_range = cannon4_range
 
 wall_d_x = math.floor((screen_width - 1)*1 / 4)
 wall_d_y = math.floor((screen_height - 1)*3 / 4)

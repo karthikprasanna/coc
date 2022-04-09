@@ -53,7 +53,6 @@ class Barbarian(Person):
 
     def attack(self, village):
         building = village.get_closest_building(self, False)
-
         if building != None:
             if(building.is_near_building(self)):
                 building.attack_building(village, self)

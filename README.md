@@ -6,7 +6,9 @@ use the controls w, a, s, d for moving the king
 
 press space to make the king attack the nearby building
 
-press the keys k, o, l to spawn the troops in three different locations
+press the keys k, o, l to spawn the barbarians in three different locations
+press the keys f, t, g to spawn the archers in three different locations
+press the keys h, u, j to spawn the balloons in three different locations
 
 press r to activate rage spell and press h to activate the heal spell
 

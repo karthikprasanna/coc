@@ -56,28 +56,48 @@ class Village(Board):
     def construct_cannon(self):
         cannon1 = Cannon(config.cannon1_x, config.cannon1_y, config.cannon1_damage, config.cannon1_range)
         self.write_object_on_board(cannon1)
+        self._buildings.append(cannon1)
+        self._defense.append(cannon1)
 
         cannon2 = Cannon(config.cannon2_x, config.cannon2_y, config.cannon2_damage, config.cannon2_range)
         self.write_object_on_board(cannon2)
-
-        self._buildings.append(cannon1)
         self._buildings.append(cannon2)
-
-        self._defense.append(cannon1)
         self._defense.append(cannon2)
+
+        if self._level >= 2:
+            cannon3 = Cannon(config.cannon3_x, config.cannon3_y, config.cannon3_damage, config.cannon3_range)
+            self.write_object_on_board(cannon3)
+            self._buildings.append(cannon3)
+            self._defense.append(cannon3)
+
+        if self._level >= 3:
+            cannon4 = Cannon(config.cannon4_x, config.cannon4_y, config.cannon4_damage, config.cannon4_range)
+            self.write_object_on_board(cannon4)
+            self._buildings.append(cannon4)
+            self._defense.append(cannon4)
 
     def construct_tower(self):
         tower1 = Tower(config.tower1_x, config.tower1_y, config.tower1_damage, config.tower1_range)
         self.write_object_on_board(tower1)
+        self._buildings.append(tower1)
+        self._defense.append(tower1)
 
         tower2 = Tower(config.tower2_x, config.tower2_y, config.tower2_damage, config.tower2_range)
         self.write_object_on_board(tower2)
-
-        self._buildings.append(tower1)
         self._buildings.append(tower2)
-
-        self._defense.append(tower1)
         self._defense.append(tower2)
+
+        if self._level >= 2:
+            tower3 = Tower(config.tower3_x, config.tower3_y, config.tower3_damage, config.tower3_range)
+            self.write_object_on_board(tower3)
+            self._buildings.append(tower3)
+            self._defense.append(tower3)
+
+        if self._level >= 3:
+            tower4 = Tower(config.tower4_x, config.tower4_y, config.tower4_damage, config.tower4_range)
+            self.write_object_on_board(tower4)
+            self._buildings.append(tower4)
+            self._defense.append(tower4)
 
     def construct_wall(self):
         for i in range(config.wall_a_x - 5, config.wall_b_x + 5):
@@ -128,10 +148,7 @@ class Village(Board):
 
     def activate_defense(self):
         for defence_object in self._defense:
-            for troop in self._troops:
-                if defence_object.is_in_attacking_range(troop):
-                    defence_object.attack(self, troop)
-                    break
+            defence_object.attack(self)
 
     def get_closest_building(self, person, include_wall=True):
         '''
@@ -147,6 +164,22 @@ class Village(Board):
                 closest_distance = distance
                 closest_building = building
         return closest_building
+
+    def get_closest_defensive_building(self, person, include_wall=True):
+        '''
+        get the closest defensive building to the person
+        '''
+        closest_building = None
+        closest_distance = config.screen_height + config.screen_width
+        for building in self._defense:
+            if building._type.split('_')[0] == 'wall' and include_wall == False:
+                continue
+            distance =  building.get_distance_to_building(person)
+            if distance < closest_distance:
+                closest_distance = distance
+                closest_building = building
+        return closest_building
+
 
     def activate_attack(self):
         for troop in self._troops:

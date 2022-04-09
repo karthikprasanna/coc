@@ -11,10 +11,10 @@ SHAPES = {
     'king_critical': [['🗡','🥷']],
     'king_attacking': [['🗡','🥷']],
 
-    'queen': [['🗡','🥷']],
-    'queen_damaged': [['🗡','🥷']],
-    'queen_critical': [['🗡','🥷']],
-    'queen_attacking': [['🗡','🥷']],
+    'queen': [['🏹','🥷', '']],
+    'queen_damaged': [['🏹','🥷', '']],
+    'queen_critical': [['🏹','🥷', '']],
+    'queen_attacking': [['🏹','🥷', '']],
 
     'wall': [['▄']],
     'wall_damaged': [['▄']],

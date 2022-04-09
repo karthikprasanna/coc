@@ -14,7 +14,7 @@ from src.bottombar import Bottombar
 
 if __name__ == '__main__':
 
-    choose_king = input('Type 1 to choose a king or 2 to choose a queen: ')
+    choose_king = '2' # input('Type 1 to choose a king or 2 to choose a queen: ')
     if choose_king == '1':
         king = King()
     elif choose_king == '2':
@@ -23,9 +23,9 @@ if __name__ == '__main__':
         print('Invalid input')
         exit()
 
-    num_barbarians = input('Enter number of barbarians: ')
-    num_archers = input('Enter number of archers: ')
-    num_balloons = input('Enter number of balloons: ')
+    num_barbarians = 10 # input('Enter number of barbarians: ')
+    num_archers = 10 # input('Enter number of archers: ')
+    num_balloons = 10 # input('Enter number of balloons: ')
 
     barbarians = Barbarians(int(num_barbarians))
     archers = Archers(int(num_archers))
@@ -51,7 +51,7 @@ if __name__ == '__main__':
     counter = []
 
     while True:
-        if time.time() - prev_time > 0.5:
+        if time.time() - prev_time > 0.1:
             prev_time = time.time()
             config.clock = not config.clock
         counter.append(config.clock)
@@ -94,9 +94,8 @@ if __name__ == '__main__':
         if not config.clock:
             config.can_defend = True
             if config.can_attack:
-                if barbarians._is_spawning:
-                    village.activate_attack()
-                    config.can_attack = False
+                village.activate_attack()
+                config.can_attack = False
 
         key = input_to(Get())
 

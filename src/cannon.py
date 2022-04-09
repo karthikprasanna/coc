@@ -23,18 +23,21 @@ class Cannon(Building):
 
         return ans_x and ans_y
 
-    def attack(self, village, troop):
-        village.remove_object_from_board(troop)
-        troop.damage_person(self._damage)
-        
-        if '_' in troop._type:
-            if troop._type.split('_')[1] == 'destroyed':
-                # remove troop from the list of troops
-                village._troops.remove(troop)
-            else:
-                village.write_object_on_board(troop)
-        else:
-            village.write_object_on_board(troop)
+    def attack(self, village):
+        for troop in village._troops:
+            if troop._type.split('_')[0] != 'balloon':
+                if self.is_in_attacking_range(troop):
+                    village.remove_object_from_board(troop)
+                    troop.damage_person(self._damage)
+                
+                    if '_' in troop._type:
+                        if troop._type.split('_')[1] == 'destroyed':
+                            # remove troop from the list of troops
+                            village._troops.remove(troop)
+                        else:
+                            village.write_object_on_board(troop)
+                    else:
+                        village.write_object_on_board(troop)
+                    break
 
-     #   self._type = 'cannon'
 

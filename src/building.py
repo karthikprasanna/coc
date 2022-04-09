@@ -29,7 +29,8 @@ class Building(Object):
             if self._type.split('_')[1] == 'destroyed':
                 # remove building from the list of buildings
                 village._buildings.remove(self)
-                if self._type.split('_')[0] == "cannon":
+                if self._type.split('_')[0] == "cannon" or self._type.split('_')[0] == "tower":
+                    
                     village._defense.remove(self)
             else:
                 village.write_object_on_board(self)
@@ -63,6 +64,35 @@ class Building(Object):
                 break
 
         return ans_x and ans_y
+
+    def is_near_building_for_queen(self, queen):
+        x = queen._x
+        y = queen._y
+
+        if queen._facing_direction == 'w':
+            y+=8
+        elif queen._facing_direction == 's':
+            y-=8
+        elif queen._facing_direction == 'a':
+            x-=8
+        elif queen._facing_direction == 'd':
+            x+=8
+
+        ans_x = False
+        for i in range(x, x + queen._w + 1):
+            if i in range(self._x - queen._attack_range, self._x + self._w + queen._attack_range + 1):
+                ans_x = True
+                break
+
+        ans_y = False
+
+        for i in range(y, y + queen._h + 1):
+            if i in range(self._y - queen._attack_range, self._y + self._h + queen._attack_range + 1):
+                ans_y = True
+                break
+
+        return ans_x and ans_y
+
 
 
     def get_distance_to_building(self, person):

@@ -183,7 +183,11 @@ class Village(Board):
 
     def activate_attack(self):
         for troop in self._troops:
-            if troop._type.split('_')[0] in ['barbarian', 'archer', 'balloon']:
+            type = troop._type.split('_')[0]
+            if type in ['barbarian', 'archer']:
+                troop.attack(self)
+            elif type == 'balloon':
+                troop.attack(self)
                 troop.attack(self)
 
     def is_village_destroyed(self):
@@ -194,10 +198,15 @@ class Village(Board):
         return True
 
     def is_troops_lost(self, barbarians, archers, balloons):
-        if len(self._troops) == 0 and (barbarians._is_spawning or archers._is_spawning or balloons._is_spawning):
+        if len(self._troops) == 0 and (barbarians._is_spawning and archers._is_spawning and balloons._is_spawning):
             return True
         else:
             return False
+
+    def reconstruct_village(self):
+        for building in self._buildings:
+            self.remove_object_from_board(building)
+            self.write_object_on_board(building)
             
 
     # write the village on the board    

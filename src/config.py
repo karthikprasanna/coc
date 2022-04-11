@@ -1,4 +1,3 @@
-from distutils.command import config
 import src.colors as colors
 import src.shapes as shapes
 import math
@@ -9,7 +8,7 @@ SHAPES = shapes.SHAPES
 
 clock = False
 
-level = 3
+level = 1
 
 can_attack= False
 can_defend = False
@@ -43,7 +42,7 @@ barbarian_attack_range = 1
 archer_damage = barbarian_damage // 2
 archer_health = barbarian_health // 2
 archer_movement_speed = barbarian_movement_speed * 2
-archer_attack_range = 45
+archer_attack_range = 25
 
 balloon_damage = barbarian_damage * 2
 balloon_health = barbarian_health 
@@ -52,11 +51,11 @@ balloon_attack_range = 1
 
 troop_max_health = 100
 
-king_initial_x = math.floor(screen_width * 3/4)
-king_initial_y = math.floor(screen_height * 1/4)
+king_initial_x = math.floor(screen_width * 15/16)
+king_initial_y = math.floor(screen_height * 1/16)
 
-queen_initial_x = math.floor(screen_width * 3/4)
-queen_initial_y = math.floor(screen_height * 1/4)
+queen_initial_x = math.floor(screen_width * 15/16)
+queen_initial_y = math.floor(screen_height * 1/16)
 
 townhall_x = math.floor((screen_width - 3) / 2)
 townhall_y = math.floor((screen_height - 4) / 2)
@@ -79,22 +78,22 @@ hut5_y = math.floor((screen_height - 1)*3 / 4) + 4
 cannon1_x = math.floor((screen_width - 1)*1 / 4)
 cannon1_y = math.floor((screen_height - 1)*1 / 4)
 cannon1_damage = 10
-cannon1_range = 40
+cannon1_range = 20
 
 cannon2_x = math.floor((screen_width - 1)*1 / 4)
 cannon2_y = math.floor((screen_height - 1)*3 / 4)
 cannon2_damage = 10
-cannon2_range = 40
+cannon2_range = 20
 
 cannon3_x = math.floor((screen_width - 1)*1 / 4) + 2
 cannon3_y = math.floor((screen_height - 1)*1 / 4)
 cannon3_damage = 10
-cannon3_range = 40
+cannon3_range = 20
 
 cannon4_x = math.floor((screen_width - 1)*1 / 4) + 2
 cannon4_y = math.floor((screen_height - 1)*3 / 4) 
 cannon4_damage = 10
-cannon4_range = 40
+cannon4_range = 20
 
 tower1_x = math.floor((screen_width - 1)*1 / 4)
 tower1_y = math.floor((screen_height - 1)*2 / 4)

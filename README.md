@@ -1,4 +1,8 @@
-# HOW TO PLAY
+# Clash of Clans Clone
+![output (4)](https://github.com/user-attachments/assets/62ae01bb-9303-4e3c-97a6-07f5423ff3c6)
+
+
+## HOW TO PLAY
 
 open the terminal and run ```python3 game.py```
 
